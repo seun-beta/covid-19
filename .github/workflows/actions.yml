@@ -35,11 +35,12 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.gh }}
-    - name: Commit and Push updated data in this repo
-      uses: mikeal/publish-to-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
+        github_token: ${{ secrets.PUSH_TOKEN }}
+        branch: ${{ github.ref }}
+    # - name: Commit and Push updated data in this repo
+    #   uses: mikeal/publish-to-github-action@master
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
 
   deploy:
     needs: update
