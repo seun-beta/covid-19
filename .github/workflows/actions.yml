@@ -6,7 +6,7 @@ on:
   schedule:
     # Upstream repo is updated daily at 4:50 AM UTC:
     # we can retrieve data a little while later.
-    - cron: '0 6 * * *'
+    - cron: '5 * * * *'
 
 jobs:
   update:
@@ -34,6 +34,11 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.gh }}
+    - name: Commit and Push updated data in this repo
+      uses: mikeal/publish-to-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
+
   deploy:
     needs: update
     runs-on: ubuntu-latest
